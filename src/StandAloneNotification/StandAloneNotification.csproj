@@ -4,6 +4,22 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+	<!-- NuGet package properties -->
+	<PackageId>Altinn.Legacy.Client.Notification</PackageId>
+	<PackageVersion>0.0.1</PackageVersion>
+	<PackageTags>Altinn;NotificationClient</PackageTags>
+	<Description>
+		Package to send notification (email/sms) through Altinn II
+	</Description>
+	<PackageReleaseNotes>
+	</PackageReleaseNotes>
+	<Authors>Altinn Platform Contributors</Authors>
+	<RepositoryType>git</RepositoryType>
+	<RepositoryUrl>https://github.com/Altinn/altinn-legacy-clients</RepositoryUrl>
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<IsPackable>true</IsPackable>	
   </PropertyGroup>
 
   <ItemGroup>

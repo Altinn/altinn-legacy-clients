@@ -1,6 +1,8 @@
-﻿namespace StandAloneNotification;
+﻿using StandAloneNotification.Models;
+
+namespace StandAloneNotification;
 
 public interface INotificationClient
 {
-    Task SendNotification(Notification notification);
+    Task SendNotification(List<Notification> notificationList);
 }
