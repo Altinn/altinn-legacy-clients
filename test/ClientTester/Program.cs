@@ -19,20 +19,12 @@ internal class Program
             .AddNotificationServices(configuration)
             .BuildServiceProvider();
 
-        /*
-         * TODO: There exists a notification type where the text templates have no hardcoded texts.
-         * => SvarutMeldingFleksibel2 = {0}{1}[2}{3}
-         * This might make it possible to hide the need for notification type for the consumers of
-         * this library, but it might also lead to unwanted limitations in how this client can 
-         * be used.
-         */
-
         Notification notification = new()
         {
             IsReservable = true,
             LanguageId = "no",
             ReporteeNumber = "910074431", //ReporteeNumber = "910460293",
-            ReceiverEndPoints = new List<ReceiverEndPointType> { new ReceiverEndPointType("", ReceiverTransportType.Email) },
+            ReceiverEndPoints = new List<ReceiverEndPointType> { new ReceiverEndPointType("terje.holene@digdir.no", ReceiverTransportType.Email) },
             NotificationType = "MacroTest" //NotificationType = "SvarutMeldingFleksibel2"
         };
         
