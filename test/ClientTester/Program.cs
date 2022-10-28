@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using StandAloneNotification;
+using StandAloneNotification.Models;
 
 internal class Program
 {
@@ -30,13 +31,14 @@ internal class Program
         {
             IsReservable = true,
             LanguageId = "no",
-            ReporteeNumber = "910460293",
-            NotificationType = "MacroTest"
+            ReporteeNumber = "910074431", //ReporteeNumber = "910460293",
+            ReceiverEndPoints = new List<ReceiverEndPointType> { new ReceiverEndPointType("", ReceiverTransportType.Email) },
+            NotificationType = "MacroTest" //NotificationType = "SvarutMeldingFleksibel2"
         };
-
+        
         var notificationClient = serviceProvider.GetRequiredService<INotificationClient>();
 
-        await notificationClient.SendNotification(notification);
+        await notificationClient.SendNotification(new List<Notification> { notification });
 
         Console.WriteLine("Hello, World!");
     }
