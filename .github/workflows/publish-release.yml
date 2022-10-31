@@ -24,13 +24,8 @@ jobs:
       - name: Build
         run: |
           dotnet build --configuration Release --no-restore -p:Deterministic=true -p:BuildNumber=${{ github.run_number }}
-      - name: Pack
-        run: |
-          dotnet pack AltinnIIClients.sln --configuration Release --no-restore --no-build -p:BuildNumber=${{ github.run_number }} -p:Deterministic=true
-      - name: Versions
-        run: |
-          dotnet --version
-      - name: Publish-Notification
+      - name: Pack and publish StandaloneNotification
         if: startsWith(github.ref, 'refs/tags/Notification-')
         run: |
+          dotnet pack src/StandaloneNotification/StandaloneNotification.csproj --configuration Release --no-restore --no-build -p:BuildNumber=${{ github.run_number }} -p:Deterministic=true
           dotnet nuget push src/StandaloneNotification/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
