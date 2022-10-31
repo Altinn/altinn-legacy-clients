@@ -17,7 +17,8 @@
 	<Authors>Altinn Platform Contributors</Authors>
 	<RepositoryType>git</RepositoryType>
 	<RepositoryUrl>https://github.com/Altinn/altinn-legacy-clients</RepositoryUrl>
-	<IsPackable>true</IsPackable>	
+	<IsPackable>true</IsPackable>
+	<MinVerTagPrefix>Notification-</MinVerTagPrefix>	
   </PropertyGroup>
 
   <ItemGroup>
