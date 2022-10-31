@@ -24,8 +24,8 @@ jobs:
       - name: Build
         run: |
           dotnet build --configuration Release --no-restore -p:Deterministic=true -p:BuildNumber=${{ github.run_number }}
-      - name: Pack and publish StandaloneNotification
+      - name: Pack and publish StandAloneNotification
         if: startsWith(github.ref, 'refs/tags/Notification-')
         run: |
-          dotnet pack src/StandaloneNotification/StandaloneNotification.csproj --configuration Release --no-restore --no-build -p:BuildNumber=${{ github.run_number }} -p:Deterministic=true
-          dotnet nuget push src/StandaloneNotification/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
+          dotnet pack src/StandAloneNotification/StandAloneNotification.csproj --configuration Release --no-restore --no-build -p:BuildNumber=${{ github.run_number }} -p:Deterministic=true
+          dotnet nuget push src/StandAloneNotification/bin/Release/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
