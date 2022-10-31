@@ -25,7 +25,6 @@ public class NotificationClient : INotificationClient
                 _notificationSettings.Username,
                 _notificationSettings.Password,
                 GetStandaloneNotifications(notificationList));
-        string next = "";
     }
 
     private static StandaloneNotificationBEList GetStandaloneNotifications(List<Notification> notificationList)
