@@ -24,8 +24,8 @@ internal class Program
             IsReservable = true,
             LanguageId = "no",
             ReporteeNumber = "910074431", //ReporteeNumber = "910460293",
-            ReceiverEndPoints = new List<ReceiverEndPointType> { new ReceiverEndPointType("terje.holene@digdir.no", ReceiverTransportType.Email) },
-            NotificationType = "MacroTest" //NotificationType = "SvarutMeldingFleksibel2"
+            ReceiverEndPoints = new List<ReceiverEndPointType> { new ReceiverEndPointType("", ReceiverTransportType.Email) },
+            NotificationType = "MacroTest"
         };
         
         var notificationClient = serviceProvider.GetRequiredService<INotificationClient>();
