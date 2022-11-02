@@ -5,7 +5,7 @@ namespace StandAloneNotification;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddNotificationServices(this IServiceCollection services, IConfigurationRoot configuration)
+    public static IServiceCollection AddNotificationServices(this IServiceCollection services, IConfiguration configuration)
     {
         NotificationSettings notificationSettings = new();
         configuration.GetRequiredSection("NotificationSettings").Bind(notificationSettings);
