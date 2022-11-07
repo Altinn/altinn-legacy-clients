@@ -7,11 +7,8 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddNotificationServices(this IServiceCollection services, IConfiguration configuration)
     {
-        NotificationSettings notificationSettings = new();
-        configuration.GetRequiredSection("NotificationSettings").Bind(notificationSettings);
-
+        services.Configure<NotificationSettings>(configuration.GetSection("NotificationSettings"));
         services.AddSingleton<INotificationClient, NotificationClient>();
-        services.AddSingleton(notificationSettings);
 
         return services;
     }
