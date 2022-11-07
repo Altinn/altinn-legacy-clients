@@ -2,6 +2,7 @@
 using System.ServiceModel.Channels;
 
 using AltinnII.Services.Notification;
+using Microsoft.Extensions.Options;
 using StandAloneNotification.Models;
 
 namespace StandAloneNotification;
@@ -10,9 +11,9 @@ public class NotificationClient : INotificationClient
 {
     private readonly NotificationSettings _notificationSettings;
 
-    public NotificationClient(NotificationSettings notificationSettings)
+    public NotificationClient(IOptions<NotificationSettings> notificationSettings)
     {
-        _notificationSettings = notificationSettings;
+        _notificationSettings = notificationSettings.Value;
     }
 
     public async Task SendNotification(List<Notification> notificationList)

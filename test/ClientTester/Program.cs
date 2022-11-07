@@ -2,7 +2,7 @@
 
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.Extensions.Options;
 using StandAloneNotification;
 using StandAloneNotification.Models;
 
@@ -15,8 +15,12 @@ internal class Program
             .AddUserSecrets(Assembly.GetExecutingAssembly())
             .Build();
 
+        NotificationSettings notificationSettings = new();
+        configuration.GetRequiredSection("NotificationSettings").Bind(notificationSettings);
+
         var serviceProvider = new ServiceCollection()
             .AddNotificationServices(configuration)
+            .AddSingleton(Options.Create(notificationSettings))
             .BuildServiceProvider();
 
         Notification notification = new()
