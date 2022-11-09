@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using StandAloneNotification;
+using StandAloneNotification.Exceptions;
 using StandAloneNotification.Models;
 
 internal class Program
@@ -34,7 +35,14 @@ internal class Program
         
         var notificationClient = serviceProvider.GetRequiredService<INotificationClient>();
 
-        await notificationClient.SendNotification(new List<Notification> { notification });
+        try
+        {
+            await notificationClient.SendNotification(new List<Notification> { notification });
+        }
+        catch (NotificationException e)
+        {
+            Console.WriteLine(e.AltinnErrorMessage);
+        }
 
         Console.WriteLine("Hello, World!");
     }
