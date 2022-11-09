@@ -3,6 +3,7 @@ using System.ServiceModel.Channels;
 
 using AltinnII.Services.Notification;
 using Microsoft.Extensions.Options;
+using StandAloneNotification.Exceptions;
 using StandAloneNotification.Models;
 
 namespace StandAloneNotification;
@@ -22,10 +23,17 @@ public class NotificationClient : INotificationClient
         EndpointAddress endpointAddress = GetEndpointAddress(_notificationSettings.ServiceEndpoint);
         NotificationAgencyExternalBasicClient client = new(binding, endpointAddress);
 
-        SendStandaloneNotificationBasicV3Response response = await client.SendStandaloneNotificationBasicV3Async(
-                _notificationSettings.Username,
-                _notificationSettings.Password,
-                GetStandaloneNotifications(notificationList));
+        try
+        {
+            SendStandaloneNotificationBasicV3Response response = await client.SendStandaloneNotificationBasicV3Async(
+                    _notificationSettings.Username,
+                    _notificationSettings.Password,
+                    GetStandaloneNotifications(notificationList));
+        }
+        catch (FaultException<AltinnFault> e)
+        {
+            throw GetNotificationException(e);
+        }
     }
 
     private static StandaloneNotificationBEList GetStandaloneNotifications(List<Notification> notificationList)
@@ -153,5 +161,19 @@ public class NotificationClient : INotificationClient
         }
 
         return new EndpointAddress(endpointUrl);
+    }
+
+    private static NotificationException GetNotificationException(FaultException<AltinnFault> e)
+    {
+        return new NotificationException(e.Detail.AltinnErrorMessage)
+        {
+            AltinnErrorMessage = e.Detail.AltinnErrorMessage,
+            AltinnExtendedErrorMessage = e.Detail.AltinnExtendedErrorMessage,
+            AltinnLocalizedErrorMessage = e.Detail.AltinnLocalizedErrorMessage,
+            ErrorGuid = e.Detail.ErrorGuid,
+            ErrorID = e.Detail.ErrorID,
+            UserGuid = e.Detail.UserGuid,
+            UserId = e.Detail.UserId
+        };
     }
 }
