@@ -1,4 +1,6 @@
 name: Pack and publish nugets
+permissions:
+  contents: write
 
 on:
   release:
